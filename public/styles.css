@@ -1,0 +1,165 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-family: "Outfit", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+		"Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+p {
+	font-size: 1.6rem;
+}
+h1 {
+	font-size: 6rem;
+}
+.app {
+	width: 100%;
+	height: 130vh;
+	position: relative;
+	background-color: rgba(0, 0, 0, 0.4);
+	color: #fff;
+	padding: 3% 0 10%;
+}
+.app::before {
+	content: "";
+	background: url("./bg.jpg") no-repeat center center/cover;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
+
+.searchbar {
+	margin-top: 1.5rem;
+	height: 60px;
+	background: rgba(0, 0, 0, 0.3);
+	border-radius: 30px;
+	padding: 10px;
+}
+
+.search_input {
+	color: white;
+	border: 0;
+	outline: 0;
+	background: none;
+	width: 0;
+	caret-color: transparent;
+	line-height: 40px;
+	transition: width 0.4s linear;
+}
+::placeholder {
+	color: white;
+}
+
+.searchbar:hover > .search_input {
+	padding: 0 10px;
+	width: auto;
+	caret-color: red;
+	transition: width 0.4s linear;
+}
+
+.searchbar:hover > .search_icon {
+	background: white;
+	color: #e74c3c;
+}
+
+.search_icon {
+	height: 40px;
+	width: 40px;
+	float: right;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	color: white;
+	text-decoration: none;
+	background: transparent;
+}
+
+.container {
+	max-width: 900px;
+	margin: auto;
+	padding: 0 1rem;
+	position: relative;
+	top: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.app .top {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.app .bottom {
+	display: flex;
+	justify-content: space-evenly;
+	text-align: center;
+	width: 100%;
+	margin: 1rem auto;
+	padding: 1rem;
+	background-color: rgba(0, 0, 0, 0.3);
+	border-radius: 12px;
+}
+
+.bold {
+	font-weight: 700;
+}
+.right-side {
+	padding-top: 3rem;
+}
+figcaption {
+	line-height: 1px;
+	text-align: center;
+	justify-content: center;
+}
+img {
+	filter: opacity(1) drop-shadow(0 0 0 white);
+}
+.forecast-button {
+	height: 60px;
+	width: auto;
+	background: rgba(0, 0, 0, 0.5);
+	border-style: none;
+	border-radius: 30px;
+	padding: 20px;
+	color: white;
+	font-weight: 700;
+	align-self: center;
+	margin: 2rem 0;
+}
+.forecast-button:hover {
+	animation: pulsate 2s ease-in-out;
+}
+@keyframes pulsate {
+	0% {
+		box-shadow: 0 0 25px #5ddcff, 0 0 25px #4e00c2;
+	}
+}
+.carousel {
+	cursor: grab;
+	overflow: hidden;
+	background-color: rgba(0, 0, 0, 0.3);
+	border-radius: 12px;
+}
+.inner-carousel {
+	display: flex;
+}
+.item {
+	width: 50%;
+	padding: 0 1rem;
+	text-align: center;
+}
+@media (max-width: 480px) {
+	.item {
+		width: 30%;
+		padding: 0 5px;
+	}
+}
