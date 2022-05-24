@@ -1,12 +1,9 @@
-import React, { useRef, useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import datas from "../assets/ForecastTestData";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function CityForecast(props) {
-	const [data, setData] = useState(datas);
-	const [width, setWidth] = useState(0);
-	const carousel = useRef();
+	const [data, setData] = useState({});
+
 	useEffect(() => {
 		const url = `https://api.openweathermap.org/data/2.5/forecast?q=${props.city}&units=metric&appid=${process.env.REACT_APP_API_KEY}`;
 		axios
@@ -15,12 +12,12 @@ function CityForecast(props) {
 				setData(response.data);
 			})
 			.catch((error) => {});
-		setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
+		// eslint-disable-next-line
 	}, []);
 	const weekDay = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-	let date;
+	let date = "";
 	let day = "";
-	let hour;
+	let hour = "";
 	let indicator = "";
 
 	function setAndGetDateTime(timeStamp) {
@@ -45,45 +42,28 @@ function CityForecast(props) {
 	return (
 		<>
 			{data.list && (
-				<motion.div
-					ref={carousel}
-					className="carousel"
-					whileTap={{ cursor: "grabbing" }}
-				>
-					<motion.div
-						drag="x"
-						dragConstraints={{ right: 0, left: -width }}
-						className="inner-carousel"
-					>
-						{data.list.map((item, index) => {
-							return (
-								<motion.div className="item" key={index}>
-									{(() => {
-										setAndGetDateTime(item.dt_txt);
-									})()}
-									<p>
-										{date}
-										{day}
-									</p>
-
-									<p>
-										{hour}
-										{indicator}
-									</p>
-									<img
-										src={
-											"https://openweathermap.org/img/wn/" +
-											item.weather[0].icon +
-											".png"
-										}
-										alt=""
-									/>
-									<p>{item.main.temp.toFixed()}°C</p>
-								</motion.div>
-							);
-						})}
-					</motion.div>
-				</motion.div>
+				<div className="carousel">
+					{data.list.map((item, index) => {
+						return (
+							<div className="item" key={index}>
+								{(() => {
+									setAndGetDateTime(item.dt_txt);
+								})()}
+								<span>{date + day}</span>
+								<span>{hour + indicator}</span>
+								<img
+									src={
+										"https://openweathermap.org/img/wn/" +
+										item.weather[0].icon +
+										".png"
+									}
+									alt=""
+								/>
+								<span>{item.main.temp.toFixed()}°C</span>
+							</div>
+						);
+					})}
+				</div>
 			)}
 		</>
 	);

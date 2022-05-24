@@ -30,6 +30,7 @@ function App() {
 		if (coordinates.lat.length && coordinates.lon.length) {
 			getWeather();
 		}
+		// eslint-disable-next-line
 	}, [coordinates]);
 
 	const urlForLat_long = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=${process.env.REACT_APP_API_KEY}`;
