@@ -1,78 +1,34 @@
 import React from "react";
+import { formatToLocalTime } from "../services/weatherServices";
 
-function WeatherTop(props) {
-	var objToday = new Date(),
-		weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-		dayOfWeek = weekday[objToday.getDay()],
-		dayOfMonth = objToday.getDate(),
-		months = [
-			"Jan",
-			"Feb",
-			"Mar",
-			"Apr",
-			"May",
-			"Jun",
-			"Jul",
-			"Aug",
-			"Sep",
-			"Oct",
-			"Nov",
-			"Dec",
-		],
-		curMonth = months[objToday.getMonth()],
-		curHour =
-			objToday.getHours() > 12
-				? objToday.getHours() - 12
-				: objToday.getHours() < 10
-				? "0" + objToday.getHours()
-				: objToday.getHours(),
-		curMinute =
-			objToday.getMinutes() < 10
-				? "0" + objToday.getMinutes()
-				: objToday.getMinutes(),
-		curMeridiem = objToday.getHours() > 12 ? "pm" : "am";
-	var today =
-		curHour +
-		":" +
-		curMinute +
-		curMeridiem +
-		", " +
-		dayOfWeek +
-		" " +
-		dayOfMonth +
-		curMonth;
-
+function WeatherTop({
+	data: { name, dt, details, icon, temp, temp_min, temp_max, timezone },
+}) {
 	return (
 		<div className="top">
 			<div className="left-side">
 				<div className="location">
-					<p>{props.data.name}</p>
+					<p>{name}</p>
 				</div>
-				<div className="temperature">
-					{props.data.main && <h1>{props.data.main.temp_max.toFixed()}°C</h1>}
-				</div>
-				{props.data.main && (
+				<div className="temperature">{temp && <h1>{temp.toFixed()}°C</h1>}</div>
+				{temp_max && (
 					<div className="min-max-temp row">
-						<p className="col">H:{props.data.main.temp_max.toFixed()}°C</p>
-						<p className="col">L:{props.data.main.temp_min.toFixed()}°C</p>
+						<p className="col">H:{temp_max.toFixed()}°C</p>
+						<p className="col">L:{temp_min.toFixed()}°C</p>
 					</div>
 				)}
-				<div>{props.data.main && <p>{today}</p>}</div>
+				<div>{dt && <p>{formatToLocalTime(dt, timezone)}</p>}</div>
 			</div>
 
 			<div className="right-side">
-				{props.data.weather && (
+				{icon && (
 					<figure>
 						<img
-							src={
-								"http://openweathermap.org/img/wn/" +
-								props.data.weather[0].icon +
-								"@2x.png"
-							}
+							src={"http://openweathermap.org/img/wn/" + icon + "@2x.png"}
 							alt=""
 						/>
 						<figcaption className="description">
-							{props.data.weather && <p>{props.data.weather[0].main}</p>}
+							{details && <p>{details}</p>}
 						</figcaption>
 					</figure>
 				)}

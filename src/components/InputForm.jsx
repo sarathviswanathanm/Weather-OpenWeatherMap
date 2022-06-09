@@ -19,6 +19,7 @@ function InputForm(props) {
 				value={city}
 				onChange={(event) => setCity(event.target.value)}
 			/>
+
 			<SearchIcon className="search_icon" onClick={handleSubmit} />
 		</div>
 	);

@@ -1,26 +1,20 @@
 import React from "react";
 
-function CityDetail(props) {
+function CityDetail({ data: { name, feels_like, humidity, speed } }) {
 	return (
 		<>
-			{props.data.name !== undefined && (
+			{name !== undefined && (
 				<div className="bottom">
 					<div className="feels">
-						{props.data.name && (
-							<p className="bold">{props.data.main.feels_like.toFixed()}°C</p>
-						)}
+						{name && <p className="bold">{feels_like.toFixed()}°C</p>}
 						<p>Feels Like</p>
 					</div>
 					<div className="humidity">
-						{props.data.main && (
-							<p className="bold">{props.data.main.humidity}%</p>
-						)}
+						{humidity && <p className="bold">{humidity}%</p>}
 						<p>Humidity</p>
 					</div>
 					<div className="wind">
-						{props.data.wind && (
-							<p className="bold">{props.data.wind.speed}km/h</p>
-						)}
+						{speed && <p className="bold">{speed}km/h</p>}
 						<p>Wind Speed</p>
 					</div>
 				</div>
